@@ -1,0 +1,4 @@
+if true
+  b = "xyz"
+end
+puts b

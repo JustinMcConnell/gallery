@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+  <title>Level</title>
+  <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+  <meta name="author" content="Justin McConnell">
+  <meta name="url" content="https://github.com/JustinMcConnell">
+
+  <style>
+  body {
+    font-family: sans-serif;
+  }
+  #level {
+    position: relative;
+    width: 500px;
+    height: 60px;
+  }
+  #glass {
+    background-color: lightgreen;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+  }
+  #right_bar,
+  #left_bar {
+    position: absolute;
+    z-index: 15;
+    background-color: #000000;
+    height: 100%;
+    width: 4px;
+  }
+  #right_bar {
+    left: 295px;
+  }
+  #left_bar {
+    right: 295px;
+  }
+  #bubble {
+    position: absolute;
+    width: 70px;
+    height: 50px;
+    top: 5px;
+    left: 215px;
+    background-color: #fff;
+    border-radius: 25px;
+    z-index: 10;
+  }
+  #output {
+    position: absolute;
+    left: 0;
+    bottom: -25px;
+    width: 500px;
+    text-align: center;
+    font-size: larger;
+  }
+  </style>
+</head>
+
+<body>
+
+  <div id="level">
+    <div id="glass"></div>
+    <div id="right_bar"></div>
+    <div id="left_bar"></div>
+    <div id="bubble"></div>
+    <div id="output"></div>
+  </div>
+
+  <script>
+  (function() {
+    var bubble = document.getElementById("bubble"),
+      bubble_width = parseInt(window.getComputedStyle(bubble, null).getPropertyValue("width"), 10),
+      level = document.getElementById("level"),
+      level_width = parseInt(window.getComputedStyle(level, null).getPropertyValue("width"), 10),
+      output = document.getElementById("output"),
+      do_orientation = function(event) {
+        var y = event.gamma.toFixed(1),
+            bubble_left = ((Math.tan(y / 45) * level_width / 2) +
+                          (level_width / 2) -
+                          (bubble_width / 2)).toFixed(0);
+        bubble.style.left = bubble_left + "px";
+        output.innerHTML = y;
+      };
+    
+    if (typeof window.DeviceOrientationEvent === "function") {
+      window.addEventListener("deviceorientation", do_orientation, true);
+    } else {
+      output.innerHTML = "Ack!  Yer computer doesnae dae device orientation.";
+    }
+  }());
+  </script>
+
+</body>
+</html>

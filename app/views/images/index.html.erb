@@ -1,0 +1,7 @@
+<ul>
+  <% @images.each do |image| %>
+    <li>
+      <a href="<%=image_path image %>"><img src="/images/<%= image.name %>"></a>
+    </li>
+  <% end %>
+</ul>

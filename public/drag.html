@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+  <title>Dragon Drop</title>
+
+  <style>
+  body {
+    min-height: 100%;
+  }
+  html.drag_enter body {
+    background: #f0f0f0;
+  }
+  #preview {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+  }
+  </style>
+
+</head>
+<body>
+  
+  <img id="preview">
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script type="text/javascript">
+  function drag_enter(event) {
+    console.log("Drag enter");
+    $(this).addClass("drag_enter");
+    event.preventDefault();
+  }
+
+  function drag_leave(event) {
+    console.log("Drag leave");
+    $(this).removeClass("drag_enter");
+    event.preventDefault();
+  }
+
+  function drag_over(event) {
+    event.preventDefault();
+  }
+
+  function on_drop(event) {
+    console.log("Drop");
+    event.preventDefault();
+    
+    var reader = new FileReader();
+    reader.addEventListener("loadend", function(event) {
+      console.log("event loadend");
+      console.log(event.target.result);
+      $("#preview").attr("src", event.target.result);
+    });
+
+    var files = event.dataTransfer.files;
+    if (files) {
+      for (var i=0, ic=files.length; i<ic; i++) {
+        console.log(files[i]);
+        reader.readAsDataURL(files[i]);
+      }
+    }
+
+    $(this).removeClass("drag_enter");
+  }
+
+  document.documentElement.addEventListener("dragenter", drag_enter);
+  document.documentElement.addEventListener("dragover", drag_over);
+  document.documentElement.addEventListener("dragleave", drag_leave);
+  document.documentElement.addEventListener("drop", on_drop);
+  </script>
+
+</body>
+</html>

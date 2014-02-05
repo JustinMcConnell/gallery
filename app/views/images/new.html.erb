@@ -1,0 +1,34 @@
+<%= form_for @image do |form| %>
+
+  <% if form.object.errors.any? %>
+    <div id="error_explanation">
+      <p>Image upload failed</p>
+      <ul>
+        <% form.object.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= button_tag "Upload File", :onclick => "$('#image_name').click(); return false;",
+                                  :type => "" %>
+    <%= form.file_field :name, :onchange => "add_file_from_computer(event);",
+                               :multiple => "multiple" %>
+  </p>
+  <p>or</p>
+
+  <p><%= label_tag "image[url]", "Grab URL" %> <%= text_field_tag "image[url]" %></p>
+  <p>or</p>
+
+  <p>Drag and drop files onto this window</p>
+
+
+  <p><%= form.submit "Upload" %></p>
+
+<% end %>
+
+<ul id="image_preview"></ul>
+
+<p>Footer</p>

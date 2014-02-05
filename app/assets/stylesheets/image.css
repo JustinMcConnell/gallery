@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: sans-serif;
+  padding: 10px;
+}
+p, h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 20px;
+}
+
+header {
+  margin: 10px 0 20px 0;
+}
+
+#image_name {
+  _display: none;
+}
+
+#image_preview li {
+  float: left;
+}
+
+#image_info {
+  display: inline-block;
+  vertical-align: top;
+}
+#image_info p,
+#image_info h2 {
+  font-size: 48px;
+  font-weight: normal;
+}
+#image_info span {
+  font-size: 16px;
+  display: block;
+}
+#image {
+  display: inline-block;
+  margin-right: 30px;
+}

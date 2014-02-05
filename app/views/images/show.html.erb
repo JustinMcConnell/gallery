@@ -1,0 +1,11 @@
+<main>
+  
+  <img id="image" src="/images/<%= @image.name %>">
+
+  <section id="image_info">
+    <h2><%= @image.name %></h2>
+    <p><%= @image.views %> <span>views</span></p>
+    <p><%= number_to_human_size @image.views * @image.size %> <span>bandwidth</span></p>
+    <p><%= @image.created_at.to_datetime.strftime("%b %e, %Y") %> <span>created</span></p>
+  </section>
+</main>
